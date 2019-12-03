@@ -1,9 +1,24 @@
 /**
+ * Creates Trip Info markup
+ * @return {string}
+ */
+const createTripInfoMarkup = () => {
+  return `
+    <div class="trip-info__main">
+      <h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>
+
+      <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;21</p>
+    </div>
+  `;
+};
+
+/**
  * Creates Main Menu markup
  * @return {string}
  */
 const createMenuMarkup = () => {
   return `
+    <h2 class="visually-hidden">Switch trip view</h2>
     <nav class="trip-controls__trip-tabs  trip-tabs">
       <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
       <a class="trip-tabs__btn" href="#">Stats</a>
@@ -17,6 +32,8 @@ const createMenuMarkup = () => {
  */
 const createFiltersMarkup = () => {
   return `
+    <h2 class="visually-hidden">Filter events</h2>
+
     <form class="trip-filters" action="#" method="get">
       <div class="trip-filters__filter">
         <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
@@ -35,20 +52,6 @@ const createFiltersMarkup = () => {
 
       <button class="visually-hidden" type="submit">Accept filter</button>
     </form>
-  `;
-};
-
-/**
- * Creates Trip Info markup
- * @return {string}
- */
-const createTripInfoMarkup = () => {
-  return `
-    <div class="trip-info__main">
-      <h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>
-
-      <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;21</p>
-    </div>
   `;
 };
 
@@ -276,6 +279,47 @@ const createNewEventMarkup = () => {
 };
 
 /**
+ * Creates Trip Event markup
+ * @return {string}
+ */
+const createEventMarkup = () => {
+  return `
+    <div class="event">
+      <div class="event__type">
+        <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
+      </div>
+      <h3 class="event__title">Taxi to airport</h3>
+
+      <div class="event__schedule">
+        <p class="event__time">
+          <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+          &mdash;
+          <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
+        </p>
+        <p class="event__duration">1H 30M</p>
+      </div>
+
+      <p class="event__price">
+        &euro;&nbsp;<span class="event__price-value">20</span>
+      </p>
+
+      <h4 class="visually-hidden">Offers:</h4>
+      <ul class="event__selected-offers">
+        <li class="event__offer">
+          <span class="event__offer-title">Order Uber</span>
+          &plus;
+          &euro;&nbsp;<span class="event__offer-price">20</span>
+        </li>
+      </ul>
+
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Open event</span>
+      </button>
+    </div>
+  `;
+};
+
+/**
  * Renders HTML markup into an exact place of HTML element
  * @param {HTMLElement} parentElement element in which to render HTML markup
  * @param {string} elementMarkup HTML markup to render
@@ -285,7 +329,19 @@ const renderElement = (parentElement, elementMarkup, place = `beforeend`) => {
   parentElement.insertAdjacentHTML(place, elementMarkup);
 };
 
-
+// Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
-console.log(createTripInfoMarkup());
 renderElement(tripInfoContainer, createTripInfoMarkup(), `afterbegin`);
+
+// Adding trip controls
+const tripControls = document.querySelector(`.trip-main__trip-controls`);
+renderElement(tripControls, createMenuMarkup());
+renderElement(tripControls, createFiltersMarkup());
+
+const tripEvents = document.querySelector(`.trip-events`);
+renderElement(tripEvents, createEventsSortMarkup());
+
+renderElement(tripEvents, createNewEventMarkup());
+renderElement(tripEvents, createEventMarkup());
+renderElement(tripEvents, createEventMarkup());
+renderElement(tripEvents, createEventMarkup());
