@@ -8,4 +8,10 @@ module.exports = {
     path: path.join(__dirname, `public`),
   },
   devtool: `source-map`,
+  devServer: {
+    contentBase: path.join(__dirname, `public`),
+    open: true,
+    port: 1337,
+    watchContentBase: true,
+  },
 };
