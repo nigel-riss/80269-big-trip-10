@@ -86,75 +86,78 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/main.js":
-/*!*********************!*\
-  !*** ./src/main.js ***!
-  \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/components/event.js":
+/*!*********************************!*\
+  !*** ./src/components/event.js ***!
+  \*********************************/
+/*! exports provided: createEventTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEventTemplate", function() { return createEventTemplate; });
 
 /**
- * Creates Trip Info markup
+ * Creates Trip Event template
  * @return {string}
  */
-const createTripInfoMarkup = () => {
+const createEventTemplate = () => {
   return `
-    <div class="trip-info__main">
-      <h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>
+    <div class="event">
+      <div class="event__type">
+        <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
+      </div>
+      <h3 class="event__title">Taxi to airport</h3>
 
-      <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;21</p>
+      <div class="event__schedule">
+        <p class="event__time">
+          <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+          &mdash;
+          <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
+        </p>
+        <p class="event__duration">1H 30M</p>
+      </div>
+
+      <p class="event__price">
+        &euro;&nbsp;<span class="event__price-value">20</span>
+      </p>
+
+      <h4 class="visually-hidden">Offers:</h4>
+      <ul class="event__selected-offers">
+        <li class="event__offer">
+          <span class="event__offer-title">Order Uber</span>
+          &plus;
+          &euro;&nbsp;<span class="event__offer-price">20</span>
+        </li>
+      </ul>
+
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Open event</span>
+      </button>
     </div>
   `;
 };
 
+
+
+
+/***/ }),
+
+/***/ "./src/components/events-sort.js":
+/*!***************************************!*\
+  !*** ./src/components/events-sort.js ***!
+  \***************************************/
+/*! exports provided: createEventsSortTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEventsSortTemplate", function() { return createEventsSortTemplate; });
 /**
- * Creates Main Menu markup
+ * Creates Trip Events Sort form template
  * @return {string}
  */
-const createMenuMarkup = () => {
-  return `
-    <h2 class="visually-hidden">Switch trip view</h2>
-    <nav class="trip-controls__trip-tabs  trip-tabs">
-      <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
-      <a class="trip-tabs__btn" href="#">Stats</a>
-    </nav>
-  `;
-};
-
-/**
- * Creates Filters markup
- * @return {string}
- */
-const createFiltersMarkup = () => {
-  return `
-    <h2 class="visually-hidden">Filter events</h2>
-
-    <form class="trip-filters" action="#" method="get">
-      <div class="trip-filters__filter">
-        <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
-        <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
-      </div>
-
-      <div class="trip-filters__filter">
-        <input id="filter-future" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="future">
-        <label class="trip-filters__filter-label" for="filter-future">Future</label>
-      </div>
-
-      <div class="trip-filters__filter">
-        <input id="filter-past" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="past">
-        <label class="trip-filters__filter-label" for="filter-past">Past</label>
-      </div>
-
-      <button class="visually-hidden" type="submit">Accept filter</button>
-    </form>
-  `;
-};
-
-/**
- * Creates Trip Events Sort form markup
- * @return {string}
- */
-const createEventsSortMarkup = () => {
+const createEventsSortTemplate = () => {
   return `
     <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
       <span class="trip-sort__item  trip-sort__item--day">Day</span>
@@ -189,11 +192,100 @@ const createEventsSortMarkup = () => {
   `;
 };
 
+
+
+
+/***/ }),
+
+/***/ "./src/components/filters.js":
+/*!***********************************!*\
+  !*** ./src/components/filters.js ***!
+  \***********************************/
+/*! exports provided: createFiltersTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFiltersTemplate", function() { return createFiltersTemplate; });
+
 /**
- * Creates New Trip Event form markup
+ * Creates Filters template
  * @return {string}
  */
-const createNewEventMarkup = () => {
+const createFiltersTemplate = () => {
+  return `
+    <h2 class="visually-hidden">Filter events</h2>
+
+    <form class="trip-filters" action="#" method="get">
+      <div class="trip-filters__filter">
+        <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
+        <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
+      </div>
+
+      <div class="trip-filters__filter">
+        <input id="filter-future" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="future">
+        <label class="trip-filters__filter-label" for="filter-future">Future</label>
+      </div>
+
+      <div class="trip-filters__filter">
+        <input id="filter-past" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="past">
+        <label class="trip-filters__filter-label" for="filter-past">Past</label>
+      </div>
+
+      <button class="visually-hidden" type="submit">Accept filter</button>
+    </form>
+  `;
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/menu.js":
+/*!********************************!*\
+  !*** ./src/components/menu.js ***!
+  \********************************/
+/*! exports provided: createMenuTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMenuTemplate", function() { return createMenuTemplate; });
+/**
+ * Creates Main Menu template
+ * @return {string}
+ */
+const createMenuTemplate = () => {
+  return `
+    <h2 class="visually-hidden">Switch trip view</h2>
+    <nav class="trip-controls__trip-tabs  trip-tabs">
+      <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
+      <a class="trip-tabs__btn" href="#">Stats</a>
+    </nav>
+  `;
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/new-event.js":
+/*!*************************************!*\
+  !*** ./src/components/new-event.js ***!
+  \*************************************/
+/*! exports provided: createNewEventTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewEventTemplate", function() { return createNewEventTemplate; });
+/**
+ * Creates New Trip Event form template
+ * @return {string}
+ */
+const createNewEventTemplate = () => {
   return `
     <form class="trip-events__item  event  event--edit" action="#" method="post">
       <header class="event__header">
@@ -373,46 +465,61 @@ const createNewEventMarkup = () => {
   `;
 };
 
+
+
+
+/***/ }),
+
+/***/ "./src/components/trip-info.js":
+/*!*************************************!*\
+  !*** ./src/components/trip-info.js ***!
+  \*************************************/
+/*! exports provided: createTripInfoTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTripInfoTemplate", function() { return createTripInfoTemplate; });
 /**
- * Creates Trip Event markup
+ * Creates Trip Info template
  * @return {string}
  */
-const createEventMarkup = () => {
+const createTripInfoTemplate = () => {
   return `
-    <div class="event">
-      <div class="event__type">
-        <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
-      </div>
-      <h3 class="event__title">Taxi to airport</h3>
+    <div class="trip-info__main">
+      <h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>
 
-      <div class="event__schedule">
-        <p class="event__time">
-          <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
-          &mdash;
-          <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
-        </p>
-        <p class="event__duration">1H 30M</p>
-      </div>
-
-      <p class="event__price">
-        &euro;&nbsp;<span class="event__price-value">20</span>
-      </p>
-
-      <h4 class="visually-hidden">Offers:</h4>
-      <ul class="event__selected-offers">
-        <li class="event__offer">
-          <span class="event__offer-title">Order Uber</span>
-          &plus;
-          &euro;&nbsp;<span class="event__offer-price">20</span>
-        </li>
-      </ul>
-
-      <button class="event__rollup-btn" type="button">
-        <span class="visually-hidden">Open event</span>
-      </button>
+      <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;21</p>
     </div>
   `;
 };
+
+
+
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_trip_info__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/trip-info */ "./src/components/trip-info.js");
+/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/menu */ "./src/components/menu.js");
+/* harmony import */ var _components_filters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/filters */ "./src/components/filters.js");
+/* harmony import */ var _components_events_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/events-sort */ "./src/components/events-sort.js");
+/* harmony import */ var _components_new_event__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/new-event */ "./src/components/new-event.js");
+/* harmony import */ var _components_event__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/event */ "./src/components/event.js");
+
+
+
+
+
+
 
 /**
  * Renders HTML markup into an exact place of HTML element
@@ -426,20 +533,20 @@ const renderElement = (parentElement, elementMarkup, place = `beforeend`) => {
 
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
-renderElement(tripInfoContainer, createTripInfoMarkup(), `afterbegin`);
+renderElement(tripInfoContainer, Object(_components_trip_info__WEBPACK_IMPORTED_MODULE_0__["createTripInfoTemplate"])(), `afterbegin`);
 
 // Adding trip controls
 const tripControls = document.querySelector(`.trip-main__trip-controls`);
-renderElement(tripControls, createMenuMarkup());
-renderElement(tripControls, createFiltersMarkup());
+renderElement(tripControls, Object(_components_menu__WEBPACK_IMPORTED_MODULE_1__["createMenuTemplate"])());
+renderElement(tripControls, Object(_components_filters__WEBPACK_IMPORTED_MODULE_2__["createFiltersTemplate"])());
 
 const tripEvents = document.querySelector(`.trip-events`);
-renderElement(tripEvents, createEventsSortMarkup());
+renderElement(tripEvents, Object(_components_events_sort__WEBPACK_IMPORTED_MODULE_3__["createEventsSortTemplate"])());
 
-renderElement(tripEvents, createNewEventMarkup());
-renderElement(tripEvents, createEventMarkup());
-renderElement(tripEvents, createEventMarkup());
-renderElement(tripEvents, createEventMarkup());
+renderElement(tripEvents, Object(_components_new_event__WEBPACK_IMPORTED_MODULE_4__["createNewEventTemplate"])());
+renderElement(tripEvents, Object(_components_event__WEBPACK_IMPORTED_MODULE_5__["createEventTemplate"])());
+renderElement(tripEvents, Object(_components_event__WEBPACK_IMPORTED_MODULE_5__["createEventTemplate"])());
+renderElement(tripEvents, Object(_components_event__WEBPACK_IMPORTED_MODULE_5__["createEventTemplate"])());
 
 
 /***/ })
