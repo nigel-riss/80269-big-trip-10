@@ -1,13 +1,18 @@
+import {} from "../utils";
 
 /**
  * Creates Trip Event template
  * @return {string}
  */
-const createEventTemplate = () => {
+const createTripEventTemplate = (tripEvent) => {
+  const {
+    type
+  } = tripEvent;
+
   return `
     <div class="event">
       <div class="event__type">
-        <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
+        <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
       <h3 class="event__title">Taxi to airport</h3>
 
@@ -40,4 +45,4 @@ const createEventTemplate = () => {
   `;
 };
 
-export {createEventTemplate};
+export {createTripEventTemplate};

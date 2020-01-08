@@ -26,6 +26,24 @@ const getRandomArrayItem = (array) => {
  * @param {Number} value number to pad
  * @return {String} Zero padded value
  */
-const castTimeFormat = (value) => {
+const padWithZero = (value) => {
   return value < 10 ? `0${value}` : String(value);
+};
+
+
+/**
+ * Renders HTML markup into an exact place of HTML element
+ * @param {HTMLElement} parentElement element in which to render HTML markup
+ * @param {string} elementMarkup HTML markup to render
+ * @param {string} place place in element to place HTML markup
+ */
+const renderElement = (parentElement, elementMarkup, place = `beforeend`) => {
+  parentElement.insertAdjacentHTML(place, elementMarkup);
+};
+
+export {
+  getRandomInteger,
+  getRandomArrayItem,
+  padWithZero,
+  renderElement,
 };

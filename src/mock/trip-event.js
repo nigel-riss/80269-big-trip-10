@@ -1,10 +1,12 @@
 import {EVENT_TYPES, CITIES} from '../const';
 
 
-const generateEvent = () => {
+const generateTripEvent = () => {
   return {
     type: ``,
     destination: ``,
 
   }
 };
+
+export {generateTripEvent};
