@@ -41,9 +41,21 @@ const renderElement = (parentElement, elementMarkup, place = `beforeend`) => {
   parentElement.insertAdjacentHTML(place, elementMarkup);
 };
 
+
+/**
+ * Returns a string with a first capital letter
+ * @param {String} string string to capitalize
+ * @return {String} string with first letter capitalized
+ */
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+
 export {
   getRandomInteger,
   getRandomArrayItem,
   padWithZero,
   renderElement,
+  capitalizeFirstLetter,
 };

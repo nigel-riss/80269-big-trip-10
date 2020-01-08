@@ -12,6 +12,7 @@ import {generateTripEvent} from './mock/trip-event';
 // Importing utility functions
 import {renderElement} from './utils';
 
+
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
 renderElement(tripInfoContainer, createTripInfoTemplate(), `afterbegin`);
@@ -25,4 +26,14 @@ const tripEvents = document.querySelector(`.trip-events`);
 renderElement(tripEvents, createEventsSortTemplate());
 
 renderElement(tripEvents, createNewEventTemplate());
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
 renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
