@@ -21,8 +21,8 @@ const generatePhotos = () => {
  * @return {Date} generated date
  */
 const generateDateTo = (dateFrom) => {
-  // Random time diviation form 15 minutes to 3 days
-  const deviationMS = getRandomInteger(15 * 60 * 1000, 3 * 24 * 60 * 60 * 1000);
+  // Random time diviation form 15 minutes to 2 days
+  const deviationMS = getRandomInteger(15 * 60 * 1000, 2 * 24 * 60 * 60 * 1000);
 
   return new Date(dateFrom.valueOf() + deviationMS);
 };
@@ -36,7 +36,7 @@ const generateTripEvent = () => {
   const activity = getRandomArrayItem(Object.values(EVENT_TYPES));
 
   const description = getArrayOfRandomItems(DESCRIPTIONS, getRandomInteger(1, 3)).join(` `);
-  const dateFrom = getRandomDate(7);
+  const dateFrom = getRandomDate(5);
   const offers = getArrayOfRandomItems(OFFERS, getRandomInteger(0, 2));
 
   return {
