@@ -7,7 +7,7 @@ import {createNewEventTemplate} from './components/new-event';
 import {createTripEventTemplate} from './components/trip-event';
 
 // Importing mocks
-import {generateTripEvent} from './mock/trip-event';
+import {generateTripEvents} from './mock/trip-event';
 
 // Importing utility functions
 import {renderElement} from './utils';
@@ -22,18 +22,11 @@ const tripControls = document.querySelector(`.trip-main__trip-controls`);
 renderElement(tripControls, createMenuTemplate());
 renderElement(tripControls, createFiltersTemplate());
 
-const tripEvents = document.querySelector(`.trip-events`);
-renderElement(tripEvents, createEventsSortTemplate());
+const tripEventsContainer = document.querySelector(`.trip-events`);
+renderElement(tripEventsContainer, createEventsSortTemplate());
+renderElement(tripEventsContainer, createNewEventTemplate());
 
-renderElement(tripEvents, createNewEventTemplate());
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
-renderElement(tripEvents, createTripEventTemplate(generateTripEvent()));
+const tripEvents = generateTripEvents(7);
+tripEvents.forEach((tripEvent) => {
+  renderElement(tripEventsContainer, createTripEventTemplate(tripEvent));
+});

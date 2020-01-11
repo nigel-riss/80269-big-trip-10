@@ -52,4 +52,13 @@ const generateTripEvent = () => {
   };
 };
 
-export {generateTripEvent};
+
+const generateTripEvents = (numberOfEvents) => {
+  return new Array(numberOfEvents)
+    .fill(``)
+    .map(() => {
+      return generateTripEvent();
+    });
+};
+
+export {generateTripEvent, generateTripEvents};
