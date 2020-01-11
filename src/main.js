@@ -8,6 +8,7 @@ import {createTripEventTemplate} from './components/trip-event';
 
 // Importing mocks
 import {generateTripEvents} from './mock/trip-event';
+import {FILTERS} from './mock/filters';
 
 // Importing utility functions
 import {renderElement} from './utils';
@@ -20,7 +21,7 @@ renderElement(tripInfoContainer, createTripInfoTemplate(), `afterbegin`);
 // Adding trip controls
 const tripControls = document.querySelector(`.trip-main__trip-controls`);
 renderElement(tripControls, createMenuTemplate());
-renderElement(tripControls, createFiltersTemplate());
+renderElement(tripControls, createFiltersTemplate(FILTERS));
 
 const tripEventsContainer = document.querySelector(`.trip-events`);
 renderElement(tripEventsContainer, createEventsSortTemplate());
