@@ -21,6 +21,33 @@ const getRandomArrayItem = (array) => {
 };
 
 
+const getArrayOfRandomItems = (array, number) => {
+  const tempArray = [...array];
+  const newArray = [];
+
+  for (let i = 0; i < number; i++) {
+    newArray.push(tempArray.splice(getRandomInteger(0, tempArray.length - 1))[0]);
+  }
+
+  return newArray;
+};
+
+
+/**
+ * Returns a date with a random limited deviation from current date
+ * @param {Number} deviationDays deviation limit in days
+ * @return {Date} random date
+ */
+const getRandomDate = (deviationDays) => {
+  const randomDate = new Date();
+  const deviationMS = deviationDays * 24 * 60 * 60 * 1000;
+
+  randomDate.setTime(randomDate.getTime() + getRandomInteger(-deviationMS, deviationMS));
+
+  return randomDate;
+};
+
+
 /**
  * Returns value in 2 digit zero padding format
  * @param {Number} value number to pad
@@ -55,6 +82,8 @@ const capitalizeFirstLetter = (string) => {
 export {
   getRandomInteger,
   getRandomArrayItem,
+  getArrayOfRandomItems,
+  getRandomDate,
   padWithZero,
   renderElement,
   capitalizeFirstLetter,

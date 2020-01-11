@@ -6,9 +6,12 @@ import {capitalizeFirstLetter} from "../utils";
  * @return {string} trip event markup
  */
 const createTripEventTemplate = (tripEvent) => {
+  console.log(tripEvent);
+
   const {
     type,
-    destination
+    preposition,
+    destination,
   } = tripEvent;
 
   return `
@@ -16,7 +19,7 @@ const createTripEventTemplate = (tripEvent) => {
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">${capitalizeFirstLetter(type)} to ${destination}</h3>
+      <h3 class="event__title">${capitalizeFirstLetter(type)} ${preposition} ${destination}</h3>
 
       <div class="event__schedule">
         <p class="event__time">

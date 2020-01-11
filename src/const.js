@@ -1,18 +1,24 @@
 export const EVENT_TYPES = {
-  transfer: [
-    `taxi`,
-    `bus`,
-    `train`,
-    `ship`,
-    `transport`,
-    `drive`,
-    `flight`,
-  ],
-  activity: [
-    `check-in`,
-    `sightseeing`,
-    `restaurant`
-  ],
+  transfer: {
+    types: [
+      `taxi`,
+      `bus`,
+      `train`,
+      `ship`,
+      `transport`,
+      `drive`,
+      `flight`,
+    ],
+    preposition: `to`,
+  },
+  activity: {
+    types: [
+      `check-in`,
+      `sightseeing`,
+      `restaurant`
+    ],
+    preposition: `in`
+  },
 };
 
 export const CITIES = [
@@ -48,4 +54,27 @@ export const DESCRIPTIONS = [
   `Aliquam erat volutpat.`,
   `Nunc fermentum tortor ac porta dapibus.`,
   `In rutrum ac purus sit amet tempus.`,
+];
+
+export const OPTIONS = [
+  {
+    type: `luggage`,
+    name: `Add luggage`,
+    price: 10,
+  },
+  {
+    type: `comfort`,
+    name: `Switch to comfort class`,
+    price: 150,
+  },
+  {
+    type: `meal`,
+    name: `Add meal`,
+    price: 2,
+  },
+  {
+    type: `seats`,
+    name: `Choose seats`,
+    price: 9,
+  },
 ];
