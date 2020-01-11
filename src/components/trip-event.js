@@ -1,4 +1,25 @@
-import {capitalizeFirstLetter} from "../utils";
+import {capitalizeFirstLetter, getDurationString, padWithZero} from "../utils";
+
+
+/**
+ * Returns offers list items markup
+ * @param {Array} offers array of offers
+ * @return {String} offers markup
+ */
+const createOffersMarkup = (offers) => {
+  return offers
+    .map((offer) => {
+      return (
+        `<li class="event__offer">
+          <span class="event__offer-title">${offer.name}</span>
+          &plus;
+          &euro;&nbsp;<span class="event__offer-price">20</span>
+        </li>`
+      );
+    })
+    .join(``);
+};
+
 
 /**
  * Creates Trip Event template
@@ -6,13 +27,22 @@ import {capitalizeFirstLetter} from "../utils";
  * @return {string} trip event markup
  */
 const createTripEventTemplate = (tripEvent) => {
-  console.log(tripEvent);
-
   const {
     type,
     preposition,
     destination,
+    dateFrom,
+    dateTo,
+    price,
+    offers,
   } = tripEvent;
+
+  const timeFrom = `${padWithZero(dateFrom.getHours())}:${padWithZero(dateFrom.getMinutes())}`;
+  const timeTo = `${padWithZero(dateTo.getHours())}:${padWithZero(dateTo.getMinutes())}`;
+  const dateTimeFrom = `${dateFrom.getFullYear()}-${padWithZero(dateFrom.getMonth())}-${padWithZero(dateFrom.getDate())}T${timeFrom}`;
+  const dateTimeTo = `${dateTo.getFullYear()}-${padWithZero(dateTo.getMonth())}-${padWithZero(dateTo.getDate())}T${timeTo}`;
+  const eventDuration = getDurationString(dateFrom, dateTo);
+  const offersMarkup = createOffersMarkup(offers);
 
   return `
     <div class="event">
@@ -23,24 +53,20 @@ const createTripEventTemplate = (tripEvent) => {
 
       <div class="event__schedule">
         <p class="event__time">
-          <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+          <time class="event__start-time" datetime="${dateTimeFrom}">${timeFrom}</time>
           &mdash;
-          <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
+          <time class="event__end-time" datetime="${dateTimeTo}">${timeTo}</time>
         </p>
-        <p class="event__duration">1H 30M</p>
+        <p class="event__duration">${eventDuration}</p>
       </div>
 
       <p class="event__price">
-        &euro;&nbsp;<span class="event__price-value">20</span>
+        &euro;&nbsp;<span class="event__price-value">${price}</span>
       </p>
 
       <h4 class="visually-hidden">Offers:</h4>
       <ul class="event__selected-offers">
-        <li class="event__offer">
-          <span class="event__offer-title">Order Uber</span>
-          &plus;
-          &euro;&nbsp;<span class="event__offer-price">20</span>
-        </li>
+        ${offersMarkup}
       </ul>
 
       <button class="event__rollup-btn" type="button">

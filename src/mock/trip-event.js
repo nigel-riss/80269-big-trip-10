@@ -1,4 +1,4 @@
-import {EVENT_TYPES, CITIES, DESCRIPTIONS, OPTIONS} from '../const';
+import {EVENT_TYPES, CITIES, DESCRIPTIONS, OFFERS} from '../const';
 import {getRandomInteger, getRandomArrayItem, getArrayOfRandomItems, getRandomDate} from '../utils';
 
 
@@ -37,7 +37,7 @@ const generateTripEvent = () => {
 
   const description = getArrayOfRandomItems(DESCRIPTIONS, getRandomInteger(1, 3)).join(` `);
   const dateFrom = getRandomDate(7);
-  const options = getArrayOfRandomItems(OPTIONS, getRandomInteger(0, 2));
+  const offers = getArrayOfRandomItems(OFFERS, getRandomInteger(0, 2));
 
   return {
     type: getRandomArrayItem(activity.types),
@@ -47,7 +47,8 @@ const generateTripEvent = () => {
     description,
     dateFrom,
     dateTo: generateDateTo(dateFrom),
-    options,
+    price: getRandomInteger(10, 200),
+    offers,
   };
 };
 

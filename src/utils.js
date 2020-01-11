@@ -26,7 +26,7 @@ const getArrayOfRandomItems = (array, number) => {
   const newArray = [];
 
   for (let i = 0; i < number; i++) {
-    newArray.push(tempArray.splice(getRandomInteger(0, tempArray.length - 1))[0]);
+    newArray.push(tempArray.splice(getRandomInteger(0, tempArray.length - 1), 1)[0]);
   }
 
   return newArray;
@@ -59,6 +59,28 @@ const padWithZero = (value) => {
 
 
 /**
+ * Returns a string in format 00D 00H 00M
+ * while skipping zero values
+ * @param {Date} start start date
+ * @param {Date} finish finish date
+ * @return {String} formated string
+ */
+const getDurationString = (start, finish) => {
+  const durationMinutes = (finish - start) / (60 * 1000);
+
+  const minutes = Math.floor(durationMinutes % 60);
+  const hours = Math.floor(durationMinutes / 60 % 24);
+  const days = Math.floor(durationMinutes / 60 / 24);
+
+  let formatedDuration = `${padWithZero(minutes)}M`;
+  formatedDuration = (hours ? `${padWithZero(hours)}H ` : ``) + formatedDuration;
+  formatedDuration = (days ? `${padWithZero(days)}D ` : ``) + formatedDuration;
+
+  return formatedDuration;
+};
+
+
+/**
  * Renders HTML markup into an exact place of HTML element
  * @param {HTMLElement} parentElement element in which to render HTML markup
  * @param {string} elementMarkup HTML markup to render
@@ -84,6 +106,7 @@ export {
   getRandomArrayItem,
   getArrayOfRandomItems,
   getRandomDate,
+  getDurationString,
   padWithZero,
   renderElement,
   capitalizeFirstLetter,

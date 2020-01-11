@@ -56,7 +56,7 @@ export const DESCRIPTIONS = [
   `In rutrum ac purus sit amet tempus.`,
 ];
 
-export const OPTIONS = [
+export const OFFERS = [
   {
     type: `luggage`,
     name: `Add luggage`,
