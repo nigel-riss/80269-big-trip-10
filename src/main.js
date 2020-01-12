@@ -16,11 +16,11 @@ import {renderElement} from './utils';
 
 
 const tripEvents = generateTripEvents(4);
-
+tripEvents.sort((a, b) => a.dateFrom - b.dateFrom);
 
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
-renderElement(tripInfoContainer, createTripInfoTemplate(), `afterbegin`);
+renderElement(tripInfoContainer, createTripInfoTemplate(tripEvents), `afterbegin`);
 
 // Adding trip controls
 const tripControls = document.querySelector(`.trip-main__trip-controls`);
@@ -38,7 +38,7 @@ renderElement(tripEventsContainer, createTripDaysListTemplate());
 const tripDaysList = document.querySelector(`.trip-days`);
 tripEvents.forEach((tripEvent, i) => {
   if (i === 0) {
-    renderElement(tripDaysList, createTripEventEditTemplate(generateTripEvent()));
+    renderElement(tripDaysList, createTripEventEditTemplate(tripEvent));
   } else {
     renderElement(tripDaysList, createTripEventTemplate(tripEvent));
   }
