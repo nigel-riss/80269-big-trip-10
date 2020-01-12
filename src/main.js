@@ -3,11 +3,11 @@ import {createTripInfoTemplate} from './components/trip-info';
 import {createMenuTemplate} from './components/menu';
 import {createFiltersTemplate} from './components/filters';
 import {createEventsSortTemplate} from './components/events-sort';
-import {createNewEventTemplate} from './components/new-event';
+import {createTripEventEditTemplate} from './components/trip-event-edit';
 import {createTripEventTemplate} from './components/trip-event';
 
 // Importing mocks
-import {generateTripEvents} from './mock/trip-event';
+import {generateTripEvents, generateTripEvent} from './mock/trip-event';
 import {FILTERS} from './mock/filters';
 
 // Importing utility functions
@@ -25,9 +25,11 @@ renderElement(tripControls, createFiltersTemplate(FILTERS));
 
 const tripEventsContainer = document.querySelector(`.trip-events`);
 renderElement(tripEventsContainer, createEventsSortTemplate());
-renderElement(tripEventsContainer, createNewEventTemplate());
 
-const tripEvents = generateTripEvents(7);
+
+renderElement(tripEventsContainer, createTripEventEditTemplate(generateTripEvent()));
+
+const tripEvents = generateTripEvents(4);
 tripEvents.forEach((tripEvent) => {
   renderElement(tripEventsContainer, createTripEventTemplate(tripEvent));
 });
