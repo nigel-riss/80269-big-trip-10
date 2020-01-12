@@ -15,7 +15,8 @@ const createCitiesMarkup = (cities) => {
 };
 
 
-const createDatesMarkup = (events) => {
+// const createDatesMarkup = (events) => {
+const createDatesMarkup = () => {
   return `Mar 11&nbsp;&mdash;&nbsp;23`;
 };
 

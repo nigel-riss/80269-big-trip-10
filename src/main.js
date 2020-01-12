@@ -8,7 +8,7 @@ import {createTripEventEditTemplate} from './components/trip-event-edit';
 import {createTripEventTemplate} from './components/trip-event';
 
 // Importing mocks
-import {generateTripEvents, generateTripEvent} from './mock/trip-event';
+import {generateTripEvents} from './mock/trip-event';
 import {FILTERS} from './mock/filters';
 
 // Importing utility functions
