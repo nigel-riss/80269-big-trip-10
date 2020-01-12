@@ -3,6 +3,7 @@ import {createTripInfoTemplate} from './components/trip-info';
 import {createMenuTemplate} from './components/menu';
 import {createFiltersTemplate} from './components/filters';
 import {createEventsSortTemplate} from './components/events-sort';
+import {createTripDaysListTemplate} from './components/trip-days';
 import {createTripEventEditTemplate} from './components/trip-event-edit';
 import {createTripEventTemplate} from './components/trip-event';
 
@@ -14,6 +15,9 @@ import {FILTERS} from './mock/filters';
 import {renderElement} from './utils';
 
 
+const tripEvents = generateTripEvents(4);
+
+
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
 renderElement(tripInfoContainer, createTripInfoTemplate(), `afterbegin`);
@@ -23,13 +27,19 @@ const tripControls = document.querySelector(`.trip-main__trip-controls`);
 renderElement(tripControls, createMenuTemplate());
 renderElement(tripControls, createFiltersTemplate(FILTERS));
 
+// Adding trip events sorting
 const tripEventsContainer = document.querySelector(`.trip-events`);
 renderElement(tripEventsContainer, createEventsSortTemplate());
 
+// Adding trip days list
+renderElement(tripEventsContainer, createTripDaysListTemplate());
 
-renderElement(tripEventsContainer, createTripEventEditTemplate(generateTripEvent()));
-
-const tripEvents = generateTripEvents(4);
-tripEvents.forEach((tripEvent) => {
-  renderElement(tripEventsContainer, createTripEventTemplate(tripEvent));
+// Adding trip events
+const tripDaysList = document.querySelector(`.trip-days`);
+tripEvents.forEach((tripEvent, i) => {
+  if (i === 0) {
+    renderElement(tripDaysList, createTripEventEditTemplate(generateTripEvent()));
+  } else {
+    renderElement(tripDaysList, createTripEventTemplate(tripEvent));
+  }
 });
