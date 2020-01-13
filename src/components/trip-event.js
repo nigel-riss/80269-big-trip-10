@@ -1,3 +1,4 @@
+import {createElement} from '../utils';
 import {capitalizeFirstLetter, getDurationString, padWithZero} from "../utils";
 
 
@@ -78,4 +79,25 @@ const createTripEventTemplate = (tripEvent) => {
   );
 };
 
-export {createTripEventTemplate};
+
+export default class TripEvent {
+  constructor(tripEvent) {
+    this._tripEvent = tripEvent;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripEventTemplate(this._tripEvent);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
