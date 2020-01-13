@@ -1,3 +1,40 @@
+export const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`,
+};
+
+
+/**
+ * Returns HTMLElement from template string
+ * @param {String} template HTML markup
+ * @return {HTMLElement}
+ */
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+
+/**
+ * Renders HTMLElement into an exact place of another HTMLelement
+ * @param {HTMLElement} container parent element in which to render
+ * @param {HTMLElement} element child element to render
+ * @param {String} place place in parent element to render child element
+ */
+const renderElement = (container, element, place) => {
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(element);
+      break;
+    case RenderPosition.BEFOREEND:
+      container.append(element);
+      break;
+  }
+};
+
+
 /**
  * Returns a random integer in a range
  * @param {Number} min minimal number (included)
@@ -81,17 +118,6 @@ const getDurationString = (start, finish) => {
 
 
 /**
- * Renders HTML markup into an exact place of HTML element
- * @param {HTMLElement} parentElement element in which to render HTML markup
- * @param {string} elementMarkup HTML markup to render
- * @param {string} place place in element to place HTML markup
- */
-const renderElement = (parentElement, elementMarkup, place = `beforeend`) => {
-  parentElement.insertAdjacentHTML(place, elementMarkup);
-};
-
-
-/**
  * Returns a string with a first capital letter
  * @param {String} string string to capitalize
  * @return {String} string with first letter capitalized
@@ -102,12 +128,13 @@ const capitalizeFirstLetter = (string) => {
 
 
 export {
+  createElement,
+  renderElement,
   getRandomInteger,
   getRandomArrayItem,
   getArrayOfRandomItems,
   getRandomDate,
   getDurationString,
   padWithZero,
-  renderElement,
   capitalizeFirstLetter,
 };
