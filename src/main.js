@@ -12,10 +12,11 @@ import {generateTripEvents} from './mock/trip-event';
 import {FILTERS} from './mock/filters';
 
 // Importing utility functions
-import {renderElement} from './utils';
+import {renderElement, RenderPosition} from './utils';
 
+const TRIP_EVENTS_NUMBER = 4;
 
-const tripEvents = generateTripEvents(4);
+const tripEvents = generateTripEvents(TRIP_EVENTS_NUMBER);
 tripEvents.sort((a, b) => a.dateFrom - b.dateFrom);
 
 // Adding trip information
