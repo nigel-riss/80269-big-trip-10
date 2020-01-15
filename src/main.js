@@ -1,11 +1,11 @@
 // Importing components
-import {createTripInfoTemplate} from './components/trip-info';
-import {createMenuTemplate} from './components/menu';
-import {createFiltersTemplate} from './components/filters';
-import {createEventsSortTemplate} from './components/events-sort';
-import {createTripDaysListTemplate} from './components/trip-days';
-import {createTripEventEditTemplate} from './components/trip-event-edit';
-import {createTripEventTemplate} from './components/trip-event';
+import TripInfoComponent from './components/trip-info';
+import MenuComponent from './components/menu';
+import FiltersComponent from './components/filters';
+// import {createEventsSortTemplate} from './components/events-sort';
+// import {createTripDaysListTemplate} from './components/trip-days';
+// import {createTripEventEditTemplate} from './components/trip-event-edit';
+// import {createTripEventTemplate} from './components/trip-event';
 
 // Importing mocks
 import {generateTripEvents} from './mock/trip-event';
@@ -15,18 +15,18 @@ import {FILTERS} from './mock/filters';
 import {renderElement, RenderPosition} from './utils';
 
 const TRIP_EVENTS_NUMBER = 4;
-
 const tripEvents = generateTripEvents(TRIP_EVENTS_NUMBER);
 tripEvents.sort((a, b) => a.dateFrom - b.dateFrom);
 
+
 // Adding trip information
-const tripInfoContainer = document.querySelector(`.trip-main__trip-info`);
-renderElement(tripInfoContainer, createTripInfoTemplate(tripEvents), `afterbegin`);
+const tripInfoContainer = document.querySelector(`.trip-main`);
+renderElement(tripInfoContainer, new TripInfoComponent(tripEvents).getElement(), RenderPosition.AFTERBEGIN);
 
 // Adding trip controls
 const tripControls = document.querySelector(`.trip-main__trip-controls`);
-renderElement(tripControls, createMenuTemplate());
-renderElement(tripControls, createFiltersTemplate(FILTERS));
+renderElement(tripControls, new MenuComponent().getElement(), RenderPosition.BEFOREEND);
+renderElement(tripControls, new FiltersComponent(FILTERS).getElement(), RenderPosition.BEFOREEND);
 
 // Adding trip events sorting
 const tripEventsContainer = document.querySelector(`.trip-events`);
