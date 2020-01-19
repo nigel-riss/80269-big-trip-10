@@ -15,9 +15,28 @@ import {FILTERS} from './mock/filters';
 import {renderElement, RenderPosition} from './utils';
 
 const TRIP_EVENTS_NUMBER = 4;
+
+
+const renderTripEvent = (tripDaysList, tripEvent) => {
+  const tripEventComponent = new TripEventComponent(tripEvent);
+  const tripEventEditComponent = new TripEventEditComponent(tripEvent);
+
+  const editButton = tripEventComponent.getElement().querySelector(`.event__rollup-btn`);
+  editButton.addEventListener(`click`, () => {
+    tripDaysList.replaceChild(tripEventEditComponent.getElement(), tripEventComponent.getElement());
+  });
+
+  const editForm = tripEventEditComponent.getElement().querySelector(`form`);
+  editForm.addEventListener(`submit`, () => {
+    tripDaysList.replaceChild(tripEventComponent.getElement(), tripEventEditComponent.getElement());
+  });
+
+  renderElement(tripDaysList, tripEventComponent.getElement(), RenderPosition.BEFOREEND);
+};
+
+
 const tripEvents = generateTripEvents(TRIP_EVENTS_NUMBER);
 tripEvents.sort((a, b) => a.dateFrom - b.dateFrom);
-
 
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main`);
@@ -37,11 +56,7 @@ const tripDaysList = new TripDaysComponent().getElement();
 renderElement(tripEventsContainer, tripDaysList, RenderPosition.BEFOREEND);
 
 // Adding trip events
-// TODO: Add appropriate 
-tripEvents.forEach((tripEvent, i) => {
-  if (i === 0) {
-    renderElement(tripDaysList, new TripEventEditComponent(tripEvent).getElement(), RenderPosition.BEFOREEND);
-  } else {
-    renderElement(tripDaysList, new TripEventComponent(tripEvent).getElement(), RenderPosition.BEFOREEND);
-  }
+// TODO: Add appropriate event addition (days-list => day => trip-event)
+tripEvents.forEach((tripEvent) => {
+  renderTripEvent(tripDaysList, tripEvent);
 });
