@@ -14,21 +14,39 @@ import {FILTERS} from './mock/filters';
 // Importing utility functions
 import {renderElement, RenderPosition} from './utils';
 
+
 const TRIP_EVENTS_NUMBER = 4;
 
 
 const renderTripEvent = (tripDaysList, tripEvent) => {
-  const tripEventComponent = new TripEventComponent(tripEvent);
-  const tripEventEditComponent = new TripEventEditComponent(tripEvent);
+  const onEscKeyDown = (evt) => {
+    const isEscKeyDown = evt.key === `Escape` || evt.key === `Esc`;
 
+    if (isEscKeyDown) {
+      replaceEditToTripEvent();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
+
+  const replaceTripEventToEdit = () => {
+    tripDaysList.replaceChild(tripEventEditComponent.getElement(), tripEventComponent.getElement());
+  };
+
+  const replaceEditToTripEvent = () => {
+    tripDaysList.replaceChild(tripEventComponent.getElement(), tripEventEditComponent.getElement());
+  };
+
+  const tripEventComponent = new TripEventComponent(tripEvent);
   const editButton = tripEventComponent.getElement().querySelector(`.event__rollup-btn`);
   editButton.addEventListener(`click`, () => {
-    tripDaysList.replaceChild(tripEventEditComponent.getElement(), tripEventComponent.getElement());
+    replaceTripEventToEdit();
+    document.addEventListener(`keydown`, onEscKeyDown);
   });
 
+  const tripEventEditComponent = new TripEventEditComponent(tripEvent);
   const editForm = tripEventEditComponent.getElement().querySelector(`form`);
   editForm.addEventListener(`submit`, () => {
-    tripDaysList.replaceChild(tripEventComponent.getElement(), tripEventEditComponent.getElement());
+    replaceEditToTripEvent();
   });
 
   renderElement(tripDaysList, tripEventComponent.getElement(), RenderPosition.BEFOREEND);
