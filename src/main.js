@@ -6,6 +6,7 @@ import EventsSortComponent from './components/events-sort';
 import TripDaysComponent from './components/trip-days';
 import TripEventEditComponent from './components/trip-event-edit';
 import TripEventComponent from './components/trip-event';
+import NoTripEventsComponent from './components/no-trip-events';
 
 // Importing mocks
 import {generateTripEvents} from './mock/trip-event';
@@ -15,7 +16,7 @@ import {FILTERS} from './mock/filters';
 import {renderElement, RenderPosition} from './utils';
 
 
-const TRIP_EVENTS_NUMBER = 4;
+const TRIP_EVENTS_NUMBER = 0;
 
 
 const renderTripEvent = (tripDaysList, tripEvent) => {
@@ -65,16 +66,21 @@ const tripControls = document.querySelector(`.trip-main__trip-controls`);
 renderElement(tripControls, new MenuComponent().getElement(), RenderPosition.BEFOREEND); // TODO: Place after appropriate h2
 renderElement(tripControls, new FiltersComponent(FILTERS).getElement(), RenderPosition.BEFOREEND);
 
-// Adding trip events sorting
 const tripEventsContainer = document.querySelector(`.trip-events`);
-renderElement(tripEventsContainer, new EventsSortComponent().getElement(), RenderPosition.BEFOREEND);
 
-// Adding trip days list
-const tripDaysList = new TripDaysComponent().getElement();
-renderElement(tripEventsContainer, tripDaysList, RenderPosition.BEFOREEND);
+if (tripEvents.length === 0) {
+  renderElement(tripEventsContainer, new NoTripEventsComponent().getElement(), RenderPosition.BEFOREEND);
+} else {
+  // Adding trip events sorting
+  renderElement(tripEventsContainer, new EventsSortComponent().getElement(), RenderPosition.BEFOREEND);
 
-// Adding trip events
-// TODO: Add appropriate event addition (days-list => day => trip-event)
-tripEvents.forEach((tripEvent) => {
-  renderTripEvent(tripDaysList, tripEvent);
-});
+  // Adding trip days list
+  const tripDaysList = new TripDaysComponent().getElement();
+  renderElement(tripEventsContainer, tripDaysList, RenderPosition.BEFOREEND);
+
+  // Adding trip events
+  // TODO: Add appropriate event addition (days-list => day => trip-event)
+  tripEvents.forEach((tripEvent) => {
+    renderTripEvent(tripDaysList, tripEvent);
+  });
+}
