@@ -1,3 +1,5 @@
+import {createElement} from '../utils';
+
 /**
  * Returns a markup of event cities
  * TODO: Fix calculations here
@@ -21,6 +23,11 @@ const createDatesMarkup = () => {
 };
 
 
+/**
+ * Returns full trip price including offers
+ * @param {Array} events array of trip events
+ * @return {Number} full trip price
+ */
 const calculateFullPrice = (events) => {
   return events
     .reduce((fullPrice, event) => {
@@ -46,17 +53,41 @@ const createTripInfoTemplate = (events) => {
   const fullPrice = calculateFullPrice(events);
 
   return (
-    `<div class="trip-info__main">
-      <h1 class="trip-info__title">${citiesMarkup}</h1>
+    `<section class="trip-main__trip-info  trip-info">
+      <div class="trip-info__main">
+        <h1 class="trip-info__title">${citiesMarkup}</h1>
 
-      <p class="trip-info__dates">${datesMarkup}</p>
-    </div>
+        <p class="trip-info__dates">${datesMarkup}</p>
+      </div>
 
-    <p class="trip-info__cost">
-      Total: &euro;&nbsp;<span class="trip-info__cost-value">${fullPrice}</span>
-    </p>`
+      <p class="trip-info__cost">
+        Total: &euro;&nbsp;<span class="trip-info__cost-value">${fullPrice}</span>
+      </p>
+    </section>`
   );
 };
 
 
-export {createTripInfoTemplate};
+export default class TripInfo {
+  constructor(events) {
+    this._events = events;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripInfoTemplate(this._events);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

@@ -1,5 +1,5 @@
 import {EVENT_TYPES, CITIES, OFFERS} from '../const';
-import {capitalizeFirstLetter, padWithZero} from '../utils';
+import {capitalizeFirstLetter, createElement, padWithZero} from '../utils';
 
 
 /**
@@ -220,4 +220,27 @@ const createTripEventEditTemplate = (tripEvent) => {
   );
 };
 
-export {createTripEventEditTemplate};
+
+export default class TripEventEdit {
+  constructor(tripEvent) {
+    this._tripEvent = tripEvent;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripEventEditTemplate(this._tripEvent);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

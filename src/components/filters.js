@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter} from '../utils';
+import {capitalizeFirstLetter, createElement} from '../utils';
 
 
 /**
@@ -37,9 +37,7 @@ const createFiltersTemplate = (filters) => {
     .join(``);
 
   return (
-    `<h2 class="visually-hidden">Filter events</h2>
-
-    <form class="trip-filters" action="#" method="get">
+    `<form class="trip-filters" action="#" method="get">
       ${filtersMarkup}
 
       <button class="visually-hidden" type="submit">Accept filter</button>
@@ -47,4 +45,26 @@ const createFiltersTemplate = (filters) => {
   );
 };
 
-export {createFiltersTemplate};
+export default class Filters {
+  constructor(filters) {
+    this._filters = filters;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFiltersTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
