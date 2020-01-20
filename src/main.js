@@ -16,7 +16,7 @@ import {FILTERS} from './mock/filters';
 import {renderElement, RenderPosition} from './utils';
 
 
-const TRIP_EVENTS_NUMBER = 0;
+const TRIP_EVENTS_NUMBER = 4;
 
 
 const renderTripEvent = (tripDaysList, tripEvent) => {
