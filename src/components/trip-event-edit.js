@@ -1,5 +1,6 @@
 import {EVENT_TYPES, CITIES, OFFERS} from '../const';
-import {capitalizeFirstLetter, createElement, padWithZero} from '../utils';
+import {capitalizeFirstLetter, padWithZero} from '../utils';
+import AbstractComponent from './abstract-component';
 
 
 /**
@@ -221,26 +222,14 @@ const createTripEventEditTemplate = (tripEvent) => {
 };
 
 
-export default class TripEventEdit {
+export default class TripEventEdit extends AbstractComponent {
   constructor(tripEvent) {
-    this._tripEvent = tripEvent;
+    super();
 
-    this._element = null;
+    this._tripEvent = tripEvent;
   }
 
   getTemplate() {
     return createTripEventEditTemplate(this._tripEvent);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

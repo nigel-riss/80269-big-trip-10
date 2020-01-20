@@ -1,5 +1,5 @@
-import {createElement} from '../utils';
 import {capitalizeFirstLetter, getDurationString, padWithZero} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 
 /**
@@ -80,26 +80,14 @@ const createTripEventTemplate = (tripEvent) => {
 };
 
 
-export default class TripEvent {
+export default class TripEvent extends AbstractComponent {
   constructor(tripEvent) {
-    this._tripEvent = tripEvent;
+    super();
 
-    this._element = null;
+    this._tripEvent = tripEvent;
   }
 
   getTemplate() {
     return createTripEventTemplate(this._tripEvent);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
