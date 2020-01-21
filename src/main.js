@@ -38,15 +38,16 @@ const renderTripEvent = (tripDaysList, tripEvent) => {
   };
 
   const tripEventComponent = new TripEventComponent(tripEvent);
-  const editButton = tripEventComponent.getElement().querySelector(`.event__rollup-btn`);
-  editButton.addEventListener(`click`, () => {
+  tripEventComponent.setRollupButtonClickHandler(() => {
     replaceTripEventToEdit();
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
   const tripEventEditComponent = new TripEventEditComponent(tripEvent);
-  const editForm = tripEventEditComponent.getElement().querySelector(`form`);
-  editForm.addEventListener(`submit`, () => {
+  tripEventEditComponent.setSubmitHandler(() => {
+    replaceEditToTripEvent();
+  });
+  tripEventEditComponent.setRollupButtonClickHandler(() => {
     replaceEditToTripEvent();
   });
 
