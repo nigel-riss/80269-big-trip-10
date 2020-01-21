@@ -232,4 +232,14 @@ export default class TripEventEdit extends AbstractComponent {
   getTemplate() {
     return createTripEventEditTemplate(this._tripEvent);
   }
+
+  setSubmitHandler(handler) {
+    this.getElement().querySelector(`form`)
+      .addEventListener(`submit`, handler);
+  }
+
+  setRollupButtonClickHandler(handler) {
+    this.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, handler);
+  }
 }

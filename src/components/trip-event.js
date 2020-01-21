@@ -90,4 +90,9 @@ export default class TripEvent extends AbstractComponent {
   getTemplate() {
     return createTripEventTemplate(this._tripEvent);
   }
+
+  setRollupButtonClickHandler(handler) {
+    this.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, handler);
+  }
 }
