@@ -2,11 +2,9 @@
 import TripInfoComponent from './components/trip-info';
 import MenuComponent from './components/menu';
 import FiltersComponent from './components/filters';
-import EventsSortComponent from './components/events-sort';
-import TripDaysComponent from './components/trip-days';
-import TripEventEditComponent from './components/trip-event-edit';
-import TripEventComponent from './components/trip-event';
-import NoTripEventsComponent from './components/no-trip-events';
+
+// Importing controllers
+import TripController from './controllers/trip';
 
 // Importing mocks
 import {generateTripEvents} from './mock/trip-event';
@@ -18,45 +16,7 @@ import {renderElement, RenderPosition} from './utils';
 
 const TRIP_EVENTS_NUMBER = 4;
 
-
-const renderTripEvent = (tripDaysList, tripEvent) => {
-  const onEscKeyDown = (evt) => {
-    const isEscKeyDown = evt.key === `Escape` || evt.key === `Esc`;
-
-    if (isEscKeyDown) {
-      replaceEditToTripEvent();
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
-  };
-
-  const replaceTripEventToEdit = () => {
-    tripDaysList.replaceChild(tripEventEditComponent.getElement(), tripEventComponent.getElement());
-  };
-
-  const replaceEditToTripEvent = () => {
-    tripDaysList.replaceChild(tripEventComponent.getElement(), tripEventEditComponent.getElement());
-  };
-
-  const tripEventComponent = new TripEventComponent(tripEvent);
-  tripEventComponent.setRollupButtonClickHandler(() => {
-    replaceTripEventToEdit();
-    document.addEventListener(`keydown`, onEscKeyDown);
-  });
-
-  const tripEventEditComponent = new TripEventEditComponent(tripEvent);
-  tripEventEditComponent.setSubmitHandler(() => {
-    replaceEditToTripEvent();
-  });
-  tripEventEditComponent.setRollupButtonClickHandler(() => {
-    replaceEditToTripEvent();
-  });
-
-  renderElement(tripDaysList, tripEventComponent.getElement(), RenderPosition.BEFOREEND);
-};
-
-
 const tripEvents = generateTripEvents(TRIP_EVENTS_NUMBER);
-tripEvents.sort((a, b) => a.dateFrom - b.dateFrom);
 
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main`);
@@ -68,20 +28,5 @@ renderElement(tripControls, new MenuComponent().getElement(), RenderPosition.BEF
 renderElement(tripControls, new FiltersComponent(FILTERS).getElement(), RenderPosition.BEFOREEND);
 
 const tripEventsContainer = document.querySelector(`.trip-events`);
-
-if (tripEvents.length === 0) {
-  renderElement(tripEventsContainer, new NoTripEventsComponent().getElement(), RenderPosition.BEFOREEND);
-} else {
-  // Adding trip events sorting
-  renderElement(tripEventsContainer, new EventsSortComponent().getElement(), RenderPosition.BEFOREEND);
-
-  // Adding trip days list
-  const tripDaysList = new TripDaysComponent().getElement();
-  renderElement(tripEventsContainer, tripDaysList, RenderPosition.BEFOREEND);
-
-  // Adding trip events
-  // TODO: Add appropriate event addition (days-list => day => trip-event)
-  tripEvents.forEach((tripEvent) => {
-    renderTripEvent(tripDaysList, tripEvent);
-  });
-}
+const tripController = new TripController(tripEventsContainer);
+tripController.render(tripEvents);
