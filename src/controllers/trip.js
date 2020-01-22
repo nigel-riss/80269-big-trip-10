@@ -58,7 +58,7 @@ export default class TripController {
 
       // Adding trip days list
       const tripDaysList = new TripDaysComponent().getElement();
-      renderElement(tripEventsContainer, tripDaysList, RenderPosition.BEFOREEND);
+      renderElement(container, tripDaysList, RenderPosition.BEFOREEND);
 
       // Adding trip events
       // TODO: Add appropriate event addition (days-list => day => trip-event)
