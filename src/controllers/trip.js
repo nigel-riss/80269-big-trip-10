@@ -5,7 +5,7 @@ import TripEventComponent from '../components/trip-event';
 import NoTripEventsComponent from '../components/no-trip-events';
 
 // Importing utility functions
-import {render, RenderPosition} from '../utils/render';
+import {render, replace, RenderPosition} from '../utils/render';
 
 const renderTripEvent = (tripDaysList, tripEvent) => {
   const onEscKeyDown = (evt) => {
@@ -18,11 +18,11 @@ const renderTripEvent = (tripDaysList, tripEvent) => {
   };
 
   const replaceTripEventToEdit = () => {
-    tripDaysList.replaceChild(tripEventEditComponent.getElement(), tripEventComponent.getElement());
+    replace(tripEventEditComponent, tripEventComponent);
   };
 
   const replaceEditToTripEvent = () => {
-    tripDaysList.replaceChild(tripEventComponent.getElement(), tripEventEditComponent.getElement());
+    replace(tripEventComponent, tripEventEditComponent);
   };
 
   const tripEventComponent = new TripEventComponent(tripEvent);
