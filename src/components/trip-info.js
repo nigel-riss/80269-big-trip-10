@@ -1,4 +1,4 @@
-import {createElement} from '../utils';
+import AbstractComponent from "./abstract-component";
 
 /**
  * Returns a markup of event cities
@@ -68,26 +68,14 @@ const createTripInfoTemplate = (events) => {
 };
 
 
-export default class TripInfo {
+export default class TripInfo extends AbstractComponent {
   constructor(events) {
-    this._events = events;
+    super();
 
-    this._element = null;
+    this._events = events;
   }
 
   getTemplate() {
     return createTripInfoTemplate(this._events);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

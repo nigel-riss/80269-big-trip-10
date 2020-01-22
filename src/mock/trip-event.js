@@ -1,5 +1,5 @@
 import {EVENT_TYPES, CITIES, DESCRIPTIONS, OFFERS} from '../const';
-import {getRandomInteger, getRandomArrayItem, getArrayOfRandomItems, getRandomDate} from '../utils';
+import {getRandomInteger, getRandomArrayItem, getArrayOfRandomItems, getRandomDate} from '../utils/common';
 
 
 /**

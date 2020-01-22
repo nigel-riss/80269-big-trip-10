@@ -1,47 +1,10 @@
-export const RenderPosition = {
-  AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`,
-};
-
-
-/**
- * Returns HTMLElement from template string
- * @param {String} template HTML markup
- * @return {HTMLElement}
- */
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-
-  return newElement.firstChild;
-};
-
-
-/**
- * Renders HTMLElement into an exact place of another HTMLelement
- * @param {HTMLElement} container parent element in which to render
- * @param {HTMLElement} element child element to render
- * @param {String} place place in parent element to render child element
- */
-const renderElement = (container, element, place) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
-
-
 /**
  * Returns a random integer in a range
  * @param {Number} min minimal number (included)
  * @param {Number} max maximal number (included)
  * @return {Number} random number
  */
-const getRandomInteger = (min, max) => {
+export const getRandomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
@@ -51,14 +14,20 @@ const getRandomInteger = (min, max) => {
  * @param {Array} array array
  * @return {*} random array element
  */
-const getRandomArrayItem = (array) => {
+export const getRandomArrayItem = (array) => {
   const randomIndex = getRandomInteger(0, array.length - 1);
 
   return array[randomIndex];
 };
 
 
-const getArrayOfRandomItems = (array, number) => {
+/**
+ * Returns an array of random items on random positions
+ * @param {Array} array ititial array
+ * @param {Number} number number of items in new array
+ * @return {Array}
+ */
+export const getArrayOfRandomItems = (array, number) => {
   const tempArray = [...array];
   const newArray = [];
 
@@ -75,7 +44,7 @@ const getArrayOfRandomItems = (array, number) => {
  * @param {Number} deviationDays deviation limit in days
  * @return {Date} random date
  */
-const getRandomDate = (deviationDays) => {
+export const getRandomDate = (deviationDays) => {
   const randomDate = new Date();
   const deviationMS = deviationDays * 24 * 60 * 60 * 1000;
 
@@ -90,7 +59,7 @@ const getRandomDate = (deviationDays) => {
  * @param {Number} value number to pad
  * @return {String} Zero padded value
  */
-const padWithZero = (value) => {
+export const padWithZero = (value) => {
   return value < 10 ? `0${value}` : String(value);
 };
 
@@ -102,7 +71,7 @@ const padWithZero = (value) => {
  * @param {Date} finish finish date
  * @return {String} formated string
  */
-const getDurationString = (start, finish) => {
+export const getDurationString = (start, finish) => {
   const durationMinutes = (finish - start) / (60 * 1000);
 
   const minutes = Math.floor(durationMinutes % 60);
@@ -122,19 +91,6 @@ const getDurationString = (start, finish) => {
  * @param {String} string string to capitalize
  * @return {String} string with first letter capitalized
  */
-const capitalizeFirstLetter = (string) => {
+export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-
-export {
-  createElement,
-  renderElement,
-  getRandomInteger,
-  getRandomArrayItem,
-  getArrayOfRandomItems,
-  getRandomDate,
-  getDurationString,
-  padWithZero,
-  capitalizeFirstLetter,
 };
