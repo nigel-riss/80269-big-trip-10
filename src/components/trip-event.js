@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter, getDurationString, padWithZero} from "../utils";
+import {capitalizeFirstLetter, getDurationString, padWithZero} from "../utils/common";
 import AbstractComponent from "./abstract-component";
 
 

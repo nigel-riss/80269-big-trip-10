@@ -12,7 +12,7 @@ import {generateTripEvents} from './mock/trip-event';
 import {FILTERS} from './mock/filters';
 
 // Importing utility functions
-import {renderElement, RenderPosition} from './utils';
+import {render, RenderPosition} from './utils/render';
 
 
 const TRIP_EVENTS_NUMBER = 4;
@@ -21,16 +21,16 @@ const tripEvents = generateTripEvents(TRIP_EVENTS_NUMBER);
 
 // Adding trip information
 const tripInfoContainer = document.querySelector(`.trip-main`);
-renderElement(tripInfoContainer, new TripInfoComponent(tripEvents).getElement(), RenderPosition.AFTERBEGIN);
+render(tripInfoContainer, new TripInfoComponent(tripEvents), RenderPosition.AFTERBEGIN);
 // Adding trip controls
 const tripControls = document.querySelector(`.trip-main__trip-controls`);
-renderElement(tripControls, new MenuComponent().getElement(), RenderPosition.BEFOREEND); // TODO: Place after appropriate h2
-renderElement(tripControls, new FiltersComponent(FILTERS).getElement(), RenderPosition.BEFOREEND);
+render(tripControls, new MenuComponent(), RenderPosition.BEFOREEND); // TODO: Place after appropriate h2
+render(tripControls, new FiltersComponent(FILTERS), RenderPosition.BEFOREEND);
 
 // Trip Events container
 const pageMainContainer = document.querySelector(`.page-main .page-body__container`);
 const tripEventsComponent = new TripEventsComponent();
-renderElement(pageMainContainer, tripEventsComponent.getElement(), RenderPosition.BEFOREEND);
+render(pageMainContainer, tripEventsComponent, RenderPosition.BEFOREEND);
 
 const tripController = new TripController(tripEventsComponent);
 tripController.render(tripEvents);

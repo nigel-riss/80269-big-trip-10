@@ -1,5 +1,5 @@
 import {EVENT_TYPES, CITIES, OFFERS} from '../const';
-import {capitalizeFirstLetter, padWithZero} from '../utils';
+import {capitalizeFirstLetter, padWithZero} from '../utils/common';
 import AbstractComponent from './abstract-component';
 
 

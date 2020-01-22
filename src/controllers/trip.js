@@ -5,7 +5,7 @@ import TripEventComponent from '../components/trip-event';
 import NoTripEventsComponent from '../components/no-trip-events';
 
 // Importing utility functions
-import {renderElement, RenderPosition} from '../utils';
+import {render, RenderPosition} from '../utils/render';
 
 const renderTripEvent = (tripDaysList, tripEvent) => {
   const onEscKeyDown = (evt) => {
@@ -39,7 +39,7 @@ const renderTripEvent = (tripDaysList, tripEvent) => {
     replaceEditToTripEvent();
   });
 
-  renderElement(tripDaysList, tripEventComponent.getElement(), RenderPosition.BEFOREEND);
+  render(tripDaysList, tripEventComponent, RenderPosition.BEFOREEND);
 };
 
 export default class TripController {
@@ -51,19 +51,19 @@ export default class TripController {
     const container = this._container.getElement();
 
     if (tripEvents.length === 0) {
-      renderElement(container, new NoTripEventsComponent().getElement(), RenderPosition.BEFOREEND);
+      render(container, new NoTripEventsComponent(), RenderPosition.BEFOREEND);
     } else {
       // Adding trip events sorting
-      renderElement(container, new EventsSortComponent().getElement(), RenderPosition.BEFOREEND);
+      render(container, new EventsSortComponent(), RenderPosition.BEFOREEND);
 
       // Adding trip days list
-      const tripDaysList = new TripDaysComponent().getElement();
-      renderElement(container, tripDaysList, RenderPosition.BEFOREEND);
+      const tripDaysListComponent = new TripDaysComponent();
+      render(container, tripDaysListComponent, RenderPosition.BEFOREEND);
 
       // Adding trip events
       // TODO: Add appropriate event addition (days-list => day => trip-event)
       tripEvents.forEach((tripEvent) => {
-        renderTripEvent(tripDaysList, tripEvent);
+        renderTripEvent(tripDaysListComponent.getElement(), tripEvent);
       });
     }
   }
