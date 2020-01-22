@@ -2,7 +2,7 @@
 import TripInfoComponent from './components/trip-info';
 import MenuComponent from './components/menu';
 import FiltersComponent from './components/filters';
-import TripDaysComponent from './components/trip-days';
+import TripEventsComponent from './components/trip-events';
 
 // Importing controllers
 import TripController from './controllers/trip';
@@ -28,9 +28,9 @@ renderElement(tripControls, new MenuComponent().getElement(), RenderPosition.BEF
 renderElement(tripControls, new FiltersComponent(FILTERS).getElement(), RenderPosition.BEFOREEND);
 
 // Trip Events container
-const tripEventsContainer = document.querySelector(`.trip-events`);
-const tripDaysComponent = new TripDaysComponent();
-renderElement(tripEventsContainer, tripDaysComponent.getElement(), RenderPosition.BEFOREEND);
+const pageMainContainer = document.querySelector(`.page-main .page-body__container`);
+const tripEventsComponent = new TripEventsComponent();
+renderElement(pageMainContainer, tripEventsComponent.getElement(), RenderPosition.BEFOREEND);
 
-const tripController = new TripController(tripDaysComponent);
+const tripController = new TripController(tripEventsComponent);
 tripController.render(tripEvents);
